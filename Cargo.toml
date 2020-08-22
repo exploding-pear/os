@@ -3,3 +3,6 @@ name = "os"
 version = "0.1.0"
 authors = ["exploding-pear"]
 edition = "2018"
+
+[dependencies]
+rlibc = "1.0.0"

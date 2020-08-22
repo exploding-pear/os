@@ -4,6 +4,7 @@
 #![no_main]
 
 use core::panic::PanicInfo;
+extern crate rlibc;
 
 // don't mangle function name
 #[no_mangle]
