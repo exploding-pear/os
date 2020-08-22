@@ -1,0 +1,13 @@
+[package]
+name = "os"
+version = "0.1.0"
+authors = ["exploding-pear"]
+edition = "2018"
+
+# abort on dev to prevent the need for eh_personallity stack unwinding
+[profile.dev]
+panic = "abort"
+
+# abort on release to prevent the need for eh_personallity stack unwinding
+[profile.release]
+panic = "abort"
