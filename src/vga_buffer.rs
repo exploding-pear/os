@@ -1,16 +1,18 @@
 #[allow(dead_code)]
 
 use volatile::Volatile;
+use core::fmt;
 
 pub fn print_something() {
+    use core::fmt::Write;
     let mut writer = Writer {
         column_position: 0,
         color_code: ColorCode::new(Color::Yellow, Color::Black),
         buffer: unsafe { &mut *(0xb8000 as *mut Buffer)},
     };
     writer.write_byte(b'H');
-    writer.write_string("ello ");
-    writer.write_string("Wörld!");
+    writer.write_string("ello! ");
+    write!(writer, "The numbers are {} and {}", 42, 1.0/3.0).unwrap();
 }
 
 
@@ -21,6 +23,13 @@ pub struct Writer {
     color_code: ColorCode,
     // reference to the VGA buffer. the 'static lifetime means live for whole program
     buffer: &'static mut Buffer,
+}
+
+impl fmt::Write for Writer {
+    fn write_str(&mut self, s: &str) -> fmt::Result {
+        self.write_string(s);
+        Ok(())
+    }
 }
 
 impl Writer {
