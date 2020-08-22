@@ -7,18 +7,18 @@ use core::panic::PanicInfo;
 extern crate rlibc;
 mod vga_buffer;
 
-static HELLO: &[u8] = b"Hello World!";
-
 // don't mangle function name
 #[no_mangle]
 // entry point. Linker looks for a function named `_start` by default
 pub extern "C" fn _start() -> ! {
-    vga_buffer::print_something();
-    loop{}
+    println!("Hello world now sum nums: {}, {}", 14, 3.0/10.0);
+    panic!("Some panic message");
+    //loop{}
 }
 
 // This function is called on panic
 #[panic_handler]
-fn panic(_info: &PanicInfo) -> ! {
+fn panic(info: &PanicInfo) -> ! {
+    println!("{}", info);
     loop{}
 }
