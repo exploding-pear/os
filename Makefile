@@ -1,4 +1,4 @@
-all: fmt test target/debug/bootimage-os.bin
+all: fmt analyze test target/debug/bootimage-os.bin
 .PHONY: fmt test clean
 
 target/debug/bootimage-os.bin:
@@ -6,6 +6,9 @@ target/debug/bootimage-os.bin:
 
 fmt:
 	cargo fmt
+
+analyze:
+	cargo clippy
 
 test:
 	cargo test
