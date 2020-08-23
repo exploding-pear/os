@@ -155,3 +155,28 @@ pub enum Color {
     Yellow = 14,
     White = 15,
 }
+
+#[test_case]
+fn test_println_simple() {
+    println!("test_println_simple output");
+}
+
+#[test_case]
+fn test_println_many() {
+    for _ in 0..200 {
+        println!("test_println_many output");
+    }
+}
+
+#[test_case]
+fn test_println_output() {
+    let s = "Some test string that fits on a single line";
+    println!("{}", s);
+    // iterating over each character in the string
+    for (i, c) in s.chars().enumerate() {
+        // locking the writer and getting the first character on the line
+        let screen_char = WRITER.lock().buffer.chars[BUFFER_HEIGHT - 2][i].read();
+        // assert that the character read matches the character in the string
+        assert_eq!(char::from(screen_char.ascii_character), c)
+    }
+}
