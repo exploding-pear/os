@@ -9,8 +9,8 @@
 
 use core::panic::PanicInfo;
 extern crate rlibc;
-mod vga_buffer;
 mod serial;
+mod vga_buffer;
 
 // don't mangle function name
 #[no_mangle]
@@ -20,7 +20,7 @@ pub extern "C" fn _start() -> ! {
     #[cfg(test)]
     test_main();
 
-    loop{}
+    loop {}
 }
 
 // This function is called on panic
@@ -28,7 +28,7 @@ pub extern "C" fn _start() -> ! {
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
     println!("{}", info);
-    loop{}
+    loop {}
 }
 
 // our panic handler in test mode
@@ -55,7 +55,6 @@ fn trivial_assertion() {
     serial_print!("trivial assertion... ");
     assert_eq!(1, 1);
     println!("[ok]");
-    loop {}
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
