@@ -50,11 +50,6 @@ fn test_runner(tests: &[&dyn Testable]) {
     exit_qemu(QemuExitCode::Success);
 }
 
-#[test_case]
-fn trivial_assertion() {
-    assert_eq!(1, 1);
-}
-
 pub trait Testable {
     fn run(&self);
 }
